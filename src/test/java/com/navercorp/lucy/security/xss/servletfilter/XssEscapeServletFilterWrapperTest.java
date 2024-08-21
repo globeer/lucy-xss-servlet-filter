@@ -121,7 +121,7 @@ public class XssEscapeServletFilterWrapperTest {
 		request.addParameter("globalParameter", "<b>Text1</b>");
 		wrapper = new XssEscapeServletFilterWrapper(request, filter);
 
-		Map<String, Object> map = wrapper.getParameterMap();
+		Map<String, String[]> map = wrapper.getParameterMap();
 		String[] values = (String[])map.get("title");
 		assertThat(values[0], is("&lt;b&gt;Text1&lt;/b&gt;"));
 		assertThat(values[1], is("&lt;b&gt;Text2&lt;/b&gt;"));

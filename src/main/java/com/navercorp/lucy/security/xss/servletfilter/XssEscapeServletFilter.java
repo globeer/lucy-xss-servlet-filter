@@ -16,7 +16,7 @@
 
 package com.navercorp.lucy.security.xss.servletfilter;
 
-import javax.servlet.*;
+import jakarta.servlet.*;
 import java.io.IOException;
 
 /**

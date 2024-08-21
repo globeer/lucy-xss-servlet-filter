@@ -18,3 +18,4 @@ bin/
 # Etc
 .springBeans
 .checkstyle
+.vscode/

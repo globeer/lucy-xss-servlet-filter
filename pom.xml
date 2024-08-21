@@ -7,7 +7,7 @@
 	<groupId>com.navercorp.lucy</groupId>
 	<artifactId>lucy-xss-servlet</artifactId>
 	<packaging>jar</packaging>
-	<version>2.0.2-SNAPSHOT</version>
+	<version>3.0.0</version>
 	<name>Lucy Xss Servlet Filter</name>
 	<description>XSS Servlet Filter for Web Service</description>
 
@@ -59,12 +59,12 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.3.2</version>
+			<version>3.16.0</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
-			<version>1.1.1</version>
+			<version>1.3.4</version>
 		</dependency>
 		<dependency>
 			<groupId>com.navercorp.lucy</groupId>
@@ -72,21 +72,28 @@
 			<version>1.6.3</version>
 		</dependency>
 		<dependency>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>6.1.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- <dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
 			<scope>provided</scope>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
+			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
-			<version>3.2.11.RELEASE</version>
+			<version>6.1.12</version>
+			<!-- <version>3.2.11.RELEASE</version> -->
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -128,10 +135,10 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.3</version>
+					<version>3.13.0</version>
 					<configuration>
-						<source>1.6</source>
-						<target>1.6</target>
+						<source>17</source>
+						<target>17</target>
 						<debug>true</debug>
 						<optimize>true</optimize>
 						<encoding>utf-8</encoding>
@@ -175,7 +182,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>findbugs-maven-plugin</artifactId>
-					<version>2.3.1</version>
+					<version>3.0.5</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -195,7 +202,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
-						<version>1.6</version>
+						<version>3.2.5</version>
 						<executions>
 							<execution>
 								<id>sign-artifacts</id>
