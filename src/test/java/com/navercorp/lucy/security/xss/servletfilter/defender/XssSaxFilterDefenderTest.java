@@ -15,10 +15,10 @@
  */
 package com.navercorp.lucy.security.xss.servletfilter.defender;
 
-import org.junit.Test;
+import static org.hamcrest.core.Is.*;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
  * @author todtod80
@@ -29,21 +29,21 @@ public class XssSaxFilterDefenderTest {
 	@Test
 	public void testWorkingDoFilter() {
 		defender.init(null);
-		assertThat(defender.doFilter("<script>Text</script>"), is("<!-- Not Allowed Tag Filtered -->&lt;script&gt;Text&lt;/script&gt;"));
+		MatcherAssert.assertThat(defender.doFilter("<script>Text</script>"), is("<!-- Not Allowed Tag Filtered -->&lt;script&gt;Text&lt;/script&gt;"));
 		
 		defender.init(new String[] {"true"});
-		assertThat(defender.doFilter("<script>Text</script>"), is("&lt;script&gt;Text&lt;/script&gt;"));
+		MatcherAssert.assertThat(defender.doFilter("<script>Text</script>"), is("&lt;script&gt;Text&lt;/script&gt;"));
 		
 		defender.init(new String[] {"lucy-xss-superset-sax.xml"});
-		assertThat(defender.doFilter("<script>Text</script>"), is("<!-- Not Allowed Tag Filtered -->&lt;script&gt;Text&lt;/script&gt;"));
+		MatcherAssert.assertThat(defender.doFilter("<script>Text</script>"), is("<!-- Not Allowed Tag Filtered -->&lt;script&gt;Text&lt;/script&gt;"));
 		
 		defender.init(new String[] {"lucy-xss-superset-sax.xml", "true"});
-		assertThat(defender.doFilter("<script>Text</script>"), is("&lt;script&gt;Text&lt;/script&gt;"));
+		MatcherAssert.assertThat(defender.doFilter("<script>Text</script>"), is("&lt;script&gt;Text&lt;/script&gt;"));
 	}
 
 	@Test(expected=NullPointerException.class)
 	public void testNotWorkingDoFilter() {
 		defender.init(new String[] {"lucy-xss-superset-sax.xml", "true", "false"});
-		assertThat(defender.doFilter("<script>Text</script>"), is("&lt;script&gt;Text&lt;/script&gt;"));
+		MatcherAssert.assertThat(defender.doFilter("<script>Text</script>"), is("&lt;script&gt;Text&lt;/script&gt;"));
 	}
 }

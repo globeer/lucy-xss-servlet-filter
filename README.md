@@ -13,7 +13,7 @@ Lucy-Xss-Servlet-Filter는 웹어플리케이션으로 들어오는 모든 요�
 - 설정한 prefix로 시작하는 파라메터 필터링 제외
 - 설정한 파라메터 필터링 제외
  
-Lucy-Xss-Servlet-Filter를 적용하게 되면 아래와 같은 장단점이 있습니다. 
+Lucy-Xss-Servlet-Filter를 적용하게 되면 아래와 같은 장단점이 있습니다.
 
 - XML 설정 만으로 XSS 방어가 가능해짐
 - 비지니스 레이어의 코드 수정이 발생하지 않음
@@ -81,7 +81,7 @@ Lucy-Xss-Servlet-Filter를 적용하게 되면 아래와 같은 장단점이 있
 
 - /resource 폴더 내에 "lucy-xss-servlet-filter-rule.xml" 파일을 생성
 
-- lucy-xss-servlet-filter-rule.xml 필터링 룰 작성  
+- lucy-xss-servlet-filter-rule.xml 필터링 룰 작성
 
 **lucy-xss-servlet-filter-rule.xml example**
 
@@ -123,7 +123,7 @@ Lucy-Xss-Servlet-Filter를 적용하게 되면 아래와 같은 장단점이 있
 
     <!-- global 필터링 룰 선언 -->
     <global>
-        <!-- 모든 url에서 들어오는 globalParameter 파라메터는 필터링 되지 않으며 
+        <!-- 모든 url에서 들어오는 globalParameter 파라메터는 필터링 되지 않으며
                 또한 globalPrefixParameter로 시작하는 파라메터도 필터링 되지 않는다. -->
         <params>
             <param name="globalParameter" useDefender="false" />
@@ -172,3 +172,17 @@ They are probably not perfect, please let us know if anything feels wrong or inc
 
 ## Licensing
 Lucy is licensed under the Apache License, Version 2.0. See LICENSE for full license text.
+
+
+## 3.0.0
+```
+./gradlew publish
+
+Publishing tasks
+----------------
+generateMetadataFileForMavenPublication - Generates the Gradle metadata file for publication 'maven'.
+generatePomFileForMavenPublication - Generates the Maven POM file for publication 'maven'.
+publish - Publishes all publications produced by this project.
+publishMavenPublicationToMavenLocal - Publishes Maven publication 'maven' to the local Maven repository.
+publishToMavenLocal - Publishes all Maven publications produced by this project to the local Maven cache.
+```

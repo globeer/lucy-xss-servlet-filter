@@ -16,10 +16,11 @@
 
 package com.navercorp.lucy.security.xss.servletfilter.defender;
 
-import org.junit.Test;
+// import static org.junit.Assert.assertThat;
+import static org.hamcrest.core.Is.*;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import org.hamcrest.MatcherAssert;
+import org.junit.Test;
 
 /**
  * @author todtod80
@@ -30,7 +31,7 @@ public class XssPreventerDefenderTest {
 	@Test
 	public void testInit() {
 		defender.init(null);
-		assertThat(defender.doFilter("<Text"), is("&lt;Text"));
-		assertThat(defender.doFilter("<b>Text</b>"), is("&lt;b&gt;Text&lt;/b&gt;"));
+		MatcherAssert.assertThat(defender.doFilter("<Text"), is("&lt;Text"));
+		MatcherAssert.assertThat(defender.doFilter("<b>Text</b>"), is("&lt;b&gt;Text&lt;/b&gt;"));
 	}
 }

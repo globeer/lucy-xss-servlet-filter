@@ -19,3 +19,7 @@ bin/
 .springBeans
 .checkstyle
 .vscode/
+
+build/
+bin/
+.gradle/

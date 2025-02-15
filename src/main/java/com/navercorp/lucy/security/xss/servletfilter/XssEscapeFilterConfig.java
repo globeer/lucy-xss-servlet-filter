@@ -16,20 +16,23 @@
 
 package com.navercorp.lucy.security.xss.servletfilter;
 
-import com.navercorp.lucy.security.xss.servletfilter.defender.Defender;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+import com.navercorp.lucy.security.xss.servletfilter.defender.Defender;
 
 /**
  * @author todtod80
@@ -279,21 +282,25 @@ public class XssEscapeFilterConfig {
 	 * @return void
 	 */
 	private void addDefender(String name, String clazz, String[] args) {
-		// TODO 필수 파라미터의 검증은 향후 DTD나 XSL등 XML 정합성체크에 맡겨야함
+		// 필수 파라미터의 검증은 향후 DTD나 XSL등 XML 정합성체크에 맡겨야함
 		if (StringUtils.isBlank(name) || StringUtils.isBlank(clazz)) {
 			String message = String.format("The defender's name('%s') or clazz('%s') is empty. This defender is ignored", name, clazz);
 			LOG.warn(message);
 			return;
 		}
 		try {
-			Defender defender = (Defender)Class.forName(clazz.trim()).newInstance();
+			Defender defender = (Defender) Class.forName(clazz.trim())
+				.getDeclaredConstructor()
+				.newInstance();
 			defender.init(args);
 			defenderMap.put(name, defender);
-		} catch (InstantiationException e) {
-			rethrow(name, clazz, e);
-		} catch (IllegalAccessException e) {
-			rethrow(name, clazz, e);
 		} catch (ClassNotFoundException e) {
+			rethrow(name, clazz, e);
+		} catch (InstantiationException | IllegalAccessException e) {
+			rethrow(name, clazz, e);
+		} catch (NoSuchMethodException e) {
+			rethrow(name, clazz, e);
+		} catch (InvocationTargetException e) {
 			rethrow(name, clazz, e);
 
 		}

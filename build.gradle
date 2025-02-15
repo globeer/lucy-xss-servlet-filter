@@ -1,0 +1,56 @@
+plugins {
+  id 'java-library'
+  id 'maven-publish'
+}
+
+group = 'com.navercorp.lucy'
+version = '3.0.1'
+description = 'Lucy Xss Servlet Filter'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  api libs.org.apache.commons.commons.lang3
+  api libs.commons.logging.commons.logging
+  api libs.com.navercorp.lucy.lucy.xss
+  testImplementation libs.junit.junit
+  testImplementation libs.org.springframework.spring.test
+  compileOnly libs.jakarta.servlet.jakarta.servlet.api
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(17)
+  }
+}
+
+publishing {
+  publications {
+    maven(MavenPublication) {
+      from(components.java)
+      pom {
+        name = 'Lucy Xss Servlet Filter'
+        description = 'Lucy Xss Servlet Filter를 org.springframework.boot version 3.x 에서도 사용할 수 있도록 수정'
+      }
+    }
+  }
+  repositories {
+    maven {
+      url = uri("https://nexus.bower.co.kr/repository/maven-releases/")
+      credentials {
+        username project.mavenUserId
+        password project.mavenUserPw
+      }
+    }
+  }
+}
+
+tasks.withType(JavaCompile) {
+  options.encoding = 'UTF-8'
+}
+
+tasks.withType(Javadoc) {
+  options.encoding = 'UTF-8'
+}

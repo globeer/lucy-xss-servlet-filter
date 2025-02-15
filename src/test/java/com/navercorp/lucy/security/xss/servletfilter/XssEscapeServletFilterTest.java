@@ -16,6 +16,11 @@
 
 package com.navercorp.lucy.security.xss.servletfilter;
 
+import static org.hamcrest.core.Is.*;
+
+import java.io.IOException;
+
+import org.hamcrest.MatcherAssert;
 import org.junit.Test;
 import org.springframework.mock.web.MockFilterChain;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -23,11 +28,6 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
-
-import java.io.IOException;
-
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
 
 /**
  * @author todtod80
@@ -69,6 +69,6 @@ public class XssEscapeServletFilterTest {
 	
 	private void assertFiltered(String paramName, String filteredValue) {
 		ServletRequest filteredRequest = chain.getRequest();
-		assertThat(filteredRequest.getParameter(paramName), is(filteredValue));
+		MatcherAssert.assertThat(filteredRequest.getParameter(paramName), is(filteredValue));
 	}
 }
